@@ -9,9 +9,9 @@ function drawCommentTree(container, data) {
 
 function addNewComment() {
     $(this).hide()
-    $(this).parent().append("<div id=\"add_new_comment\" style=\"display: flex; padding: 15px 0\">\n" +
-        "        <div style=\"flex: 0 0 30%; flex-direction: column\">\n" +
-        "            <textarea rows=\"4\" placeholder=\"Введите комментарий\" style=\"display: block; margin-bottom: 5px\"></textarea>\n" +
+    $(this).parent().append("<div id=\"add_new_comment\" class=\"add_new_comment_block\">\n" +
+        "        <div class=\"add_new_comment_block_internal\">\n" +
+        "            <textarea rows=\"4\" placeholder=\"Введите комментарий\" class=\"add_new_comment_block_textarea\"></textarea>\n" +
         "            <button  name=\"send_button\" data-parent-id=\"" + null + "\">Отправить</button><button id=\"add_new_comment_cancel\">Отмена</button>\n" +
         "        </div>\n" +
         "    </div>")
@@ -35,10 +35,10 @@ function addCommentInTree(comment) {
         addNewCommentCancel()
         element = $("#comment-tree-wrapper")
     }
-    element.append("<div id=\"comment_"+comment.id+"\" style=\"padding: 5px 20px; display: flex; flex-direction: column\">\n" +
-        "    <div style=\"padding: 5px 0\">Author: "+comment.author+"</div>\n" +
-        "    <div style=\"padding: 5px 0\"><span>Comment:</span> <span id=\"comment_"+comment.id+"_text\" >"+comment.comment+"</span></div>\n" +
-        "    <div style=\"margin-top: 15px\">\n" +
+    element.append("<div id=\"comment_"+comment.id+"\" class=\"comment_block\">\n" +
+        "    <div class=\"comment_field\">Author: "+comment.author+"</div>\n" +
+        "    <div class=\"comment_field\"><span>Comment:</span> <span id=\"comment_"+comment.id+"_text\" >"+comment.comment+"</span></div>\n" +
+        "    <div class=\"comment_button_block\">\n" +
         "        <button name=\"reply_button\" data-parent-id=\""+comment.id+"\">Ответить</button>\n" +
         "        <button name=\"edit_comment\" id=\"edit_comment_"+comment.id+"\" data-comment-id=\""+comment.id+"\">Редактировать</button>\n" +
         "         <button name=\"delete_comment\" id=\"delete_comment_"+comment.id+"\" data-comment-id=\""+comment.id+"\">Удалить</button>\n" +
@@ -54,9 +54,9 @@ function addCommentInTree(comment) {
 function replyClick() {
     let parentId = $(this).data("parentId")
     if ($(this).parent().find("#field_reply_" + parentId).length === 0) {
-        $(this).parent().append("<div id=\"field_reply_" + parentId + "\" style=\"display: flex; padding: 15px 0\">\n" +
-            "        <div style=\"flex: 0 0 30%; flex-direction: column\">\n" +
-            "            <textarea rows=\"4\" placeholder=\"Введите комментарий\" style=\"display: block; margin-bottom: 5px\"></textarea>\n" +
+        $(this).parent().append("<div id=\"field_reply_" + parentId + "\" class=\"add_new_comment_block\">\n" +
+            "        <div class=\"add_new_comment_block_internal\">\n" +
+            "            <textarea rows=\"4\" placeholder=\"Введите комментарий\" class=\"add_new_comment_block_textarea\"></textarea>\n" +
             "            <button name=\"send_button\" data-parent-id=\"" + parentId + "\">Отправить</button>\n" +
             "        </div>\n" +
             "    </div>")
@@ -89,8 +89,11 @@ function editComment() {
     let commentId = $(this).data("commentId")
     let textSpan = $("#comment_"+commentId+"_text");
     let text = textSpan.text()
-    textSpan.html("<div style='display: flex; flex-direction: column'><textarea  id=\"edit_comment_"+commentId+"\" rows=\"4\" placeholder=\"Введите комментарий\" style=\"display: block; flex: 0 0 50%; margin-bottom: 5px\">" +
-        text + "</textarea><button name=\"send_edit_button\" data-comment-id=\"" + commentId + "\">Отправить</button></div>")
+    textSpan.html("<div class=\"add_new_comment_block_internal\">\n" +
+        "            <textarea id=\"edit_comment_"+commentId+"\" rows=\"4\" placeholder=\"Введите комментарий\" class=\"add_new_comment_block_textarea\">"+text+"</textarea>\n" +
+        "            <button name=\"send_edit_button\" data-comment-id=\"" + commentId + "\">Отправить</button>\n" +
+        "        </div>\n" +
+        "    </div>")
     $("button[name='send_edit_button']").on("click", sendEditButton);
 }
 

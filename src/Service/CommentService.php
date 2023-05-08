@@ -120,11 +120,14 @@ class CommentService
             if (isset($comment['replies'])) {
                 $replies = $this->buildTree($comment['replies'], $user, $commentId3rdLevelWithThread);
             }
+//            if ($comment['id'] == 1) {
+//                dd($user === $comment['author'], !isset($comment['deletedAt']), $comment['createdAt'] < $this->getHourAgo());
+//            }
             $result = $this->environment->render("/comment/__comment.html.twig", [
                 'comment' => $comment,
                 'haveMore' => isset($commentId3rdLevelWithThread) && in_array($comment['id'], $commentId3rdLevelWithThread),
                 'replies' => $replies ?? null,
-                'canBeEdit' => $user === $comment['author'] && !isset($comment['deletedAt'])
+                'canBeEdit' => $user === $comment['author'] && !isset($comment['deletedAt']) && $comment['createdAt'] > $this->getHourAgo()
             ]) . $result;
             unset($replies);
         }

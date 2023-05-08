@@ -4,11 +4,61 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/comments.js') }}"></script>
+    <style>
+        .auth_block_external {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 2px solid black;
+            padding-bottom: 15px;
+            margin-bottom: 15px
+        }
+        .auth_block_internal {
+            display: flex;
+            justify-content: center
+        }
+        .comment_tree_wrapper {
+            display: flex;
+            flex-direction: column
+        }
+        .comment_block {
+            padding: 5px 20px;
+            display: flex;
+            flex-direction: column
+        }
+        .comment_field {
+            padding: 5px 0
+        }
+        .comment_button_block {
+            margin-top: 15px
+        }
+        .add_new_comment_block {
+            display: flex;
+            padding: 15px 0
+        }
+        .add_new_comment_block_internal {
+            flex: 0 0 30%;
+            flex-direction: column
+        }
+        .add_new_comment_block_textarea {
+            display: block;
+            margin-bottom: 5px
+        }
+        .edit_comment_block {
+            display: flex;
+            flex-direction: column
+        }
+        .edit_comment_textarea {
+            display: block;
+            flex: 0 0 50%;
+            margin-bottom: 5px
+        }
+
+    </style>
 {% endblock %}
 
 {% block body %}
-<div style="display: flex; flex-direction: column; border-bottom: 2px solid black; padding-bottom: 15px; margin-bottom: 15px">
-    <div id="process_auth" style="display: flex; justify-content: center">
+<div class="auth_block_external">
+    <div id="process_auth" class="auth_block_internal">
         <div>
             <h3>Авторизация</h3>
             <p>Если ввести имя из тех что уже есть в комментариях, эти комментарии станут вашими</p>
@@ -16,7 +66,7 @@
             <button id="save_name">Сохранить</button>
         </div>
     </div>
-    <div id="auth_complete" style="display: none; justify-content: center">
+    <div id="auth_complete" class="auth_block_internal">
         <div>
             <p>Авторизация под именем: <span id="span_name"></span></p>
             <button id="delete_name">Выйти</button>
@@ -27,7 +77,7 @@
     <div>
         <button id="add_new_comment_button">Добавить комментарий</button>
     </div>
-    <div id="comment-tree-wrapper" style="display: flex; flex-direction: column">
+    <div id="comment-tree-wrapper" class="comment_tree_wrapper">
 
     </div>
 </div>
