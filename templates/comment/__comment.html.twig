@@ -1,0 +1,30 @@
+<div id="comment_{{ comment.id }}" style="padding: 5px 20px; display: flex; flex-direction: column">
+    <div style="padding: 5px 0">Author: {{ comment.author }}</div>
+{#    <div style="padding: 5px 0">Rang: {{ comment.rang }}</div>#}
+{#    <div style="padding: 5px 0">Id: {{ comment.id }}</div>#}
+    <div style="padding: 5px 0"><span>Comment:</span> <span id="comment_{{ comment.id }}_text" >{{ comment.comment }}</span></div>
+    <div style="margin-top: 15px">
+        <button name="reply_button" data-parent-id="{{ comment.id }}">Ответить</button>
+        {% if haveMore == true %}
+            <button name="show_more" id="show_more_{{ comment.id }}" data-parent-id="{{ comment.id }}">Показать еще</button>
+        {% endif %}
+        {% if canBeEdit == true %}
+            <button name="edit_comment" id="edit_comment_{{ comment.id }}" data-comment-id="{{ comment.id }}">Редактировать</button>
+            <button name="delete_comment" data-comment-id="{{ comment.id }}">Удалить</button>
+        {% endif %}
+    </div>
+    <div id="replies_for_{{ comment.id }}" style="margin-left: {{ 30 * comment.rang }}px">
+        {{ replies|raw }}
+    </div>
+</div>
+
+{#<div id="comment_{{ comment.id }}" style="padding: 5px 20px; display: flex; flex-direction: column">#}
+{#    <div style="padding: 5px 0">Author: {{ comment.author }}</div>#}
+{#    <div style="padding: 5px 0">Rang: {{ comment.rang }}</div>#}
+{#    <div style="padding: 5px 0">Id: {{ comment.id }}</div>#}
+{#    <div style="padding: 5px 0">Comment: {{ comment.comment }}</div>#}
+{#    <div style="margin-top: 15px">#}
+{#        <button name="reply_button" data-parent-id="{{ comment.id }}">Ответить</button>#}
+{#        <button>Редактировать</button>#}
+{#    </div>#}
+{#</div>#}

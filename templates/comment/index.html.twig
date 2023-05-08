@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentController!{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/comments.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div style="display: flex; flex-direction: column; border-bottom: 2px solid black; padding-bottom: 15px; margin-bottom: 15px">
+    <div id="process_auth" style="display: flex; justify-content: center">
+        <div>
+            <h3>Авторизация</h3>
+            <p>Если ввести имя из тех что уже есть в комментариях, эти комментарии станут вашими</p>
+            <input id="name_input" type="text" placeholder="Введите имя">
+            <button id="save_name">Сохранить</button>
+        </div>
+    </div>
+    <div id="auth_complete" style="display: none; justify-content: center">
+        <div>
+            <p>Авторизация под именем: <span id="span_name"></span></p>
+            <button id="delete_name">Выйти</button>
+        </div>
+    </div>
+</div>
+<div>
+    <div>
+        <button id="add_new_comment_button">Добавить комментарий</button>
+    </div>
+    <div id="comment-tree-wrapper" style="display: flex; flex-direction: column">
+
+    </div>
+</div>
+
+{% endblock %}
